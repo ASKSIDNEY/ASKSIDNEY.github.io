@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Pick What I Build Next — AskSidney | Fix The Trader</title>
+<meta name="description" content="Four free trading-psychology courses. You decide which one gets built first. Voters get it before anyone else.">
+<style>
+  :root{
+    --navy:#0d1b2a; --navy-2:#13263a; --gold:#E8B94A; --gold-dark:#241A05;
+    --text:#f4f1e8; --muted:#a8b3c0; --err:#ff7b6b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.5}
+  .wrap{width:100%;max-width:520px;padding:28px 18px 44px}
+  .brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:center;margin-bottom:22px}
+  h1{font-size:clamp(26px,7vw,34px);line-height:1.15;text-align:center;font-weight:800}
+  .sub{margin:12px auto 22px;text-align:center;color:var(--muted);font-size:15.5px;max-width:440px}
+  .sub strong{color:var(--text)}
+  .ballot{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+  .card{
+    display:flex;gap:14px;align-items:flex-start;cursor:pointer;
+    background:var(--navy-2);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;
+    transition:border-color .12s;
+  }
+  .card input{margin-top:4px;accent-color:var(--gold);width:18px;height:18px;flex:none}
+  .card.selected{border-color:var(--gold)}
+  .card .letter{font-weight:800;color:var(--gold);margin-right:2px}
+  .card h3{font-size:15.5px;font-weight:700;display:inline}
+  .card p{font-size:13.5px;color:var(--muted);margin-top:3px}
+  form.details{background:var(--navy-2);border-radius:14px;padding:20px 18px;border:1px solid rgba(255,255,255,.06)}
+  label{display:block;font-size:13.5px;color:var(--muted);margin:12px 0 5px}
+  label:first-of-type{margin-top:0}
+  input[type=text],input[type=email]{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:var(--navy);color:var(--text);font-size:16px;outline:none}
+  input:focus{border-color:var(--gold)}
+  button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:10px;cursor:pointer;background:var(--gold);color:var(--gold-dark);font-size:17px;font-weight:800}
+  button:disabled{opacity:.6;cursor:wait}
+  .fine{margin-top:12px;text-align:center;font-size:12.5px;color:var(--muted)}
+  .success{display:none;background:var(--navy-2);border:1px solid rgba(232,185,74,.4);border-radius:14px;padding:28px 22px;text-align:center}
+  .success h2{color:var(--gold);font-size:22px;margin-bottom:10px}
+  .success p{font-size:15px}
+  .error-msg{display:none;margin-top:12px;color:var(--err);font-size:14px;text-align:center}
+  footer{margin-top:auto;padding:16px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:520px}
+  .hp{position:absolute;left:-5000px;opacity:0;height:0;overflow:hidden}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">AskSidney&nbsp;|&nbsp;Fix The Trader</div>
+
+    <h1>You pick what I <span style="color:var(--gold)">build next.</span></h1>
+    <p class="sub">Four free courses. I'm building all of them eventually — <strong>you decide what comes first.</strong> Voters get the winner before anyone else, plus the free Habit Tracker today.</p>
+
+    <div id="vote-area">
+      <div class="ballot" id="ballot">
+        <label class="card"><input type="radio" name="vote" value="A">
+          <span><span class="letter">A ·</span><h3>Profitable at 45%</h3><p>Stop needing to be right to make money.</p></span></label>
+        <label class="card"><input type="radio" name="vote" value="B">
+          <span><span class="letter">B ·</span><h3>The Loss Autopsy</h3><p>Turn losses into tuition, not trauma.</p></span></label>
+        <label class="card"><input type="radio" name="vote" value="C">
+          <span><span class="letter">C ·</span><h3>The Comeback Protocol</h3><p>Rebuild after a blown account — without repeating it.</p></span></label>
+        <label class="card"><input type="radio" name="vote" value="D">
+          <span><span class="letter">D ·</span><h3>Trading in Kenya Without Getting Played</h3><p>Start clean: licensed brokers, M-Pesa done right, no signal groups.</p></span></label>
+      </div>
+
+      <form class="details" id="vote-form" novalidate>
+        <label for="first_name">First name</label>
+        <input id="first_name" name="first_name" type="text" required maxlength="60" placeholder="Your first name">
+
+        <label for="email">Email — your tracker + early access land here</label>
+        <input id="email" name="email" type="email" required maxlength="120" placeholder="you@example.com">
+
+        <div class="hp" aria-hidden="true"><label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off"></div>
+
+        <button id="submit-btn" type="submit">Cast my vote →</button>
+        <p class="fine">One vote per person. You'll get the Habit Tracker by email right now, and the winning course before it goes public. No spam — unsubscribe anytime.</p>
+        <p class="error-msg" id="error-msg"></p>
+      </form>
+    </div>
+
+    <div class="success" id="success-box">
+      <h2>Vote counted ✅</h2>
+      <p>Check your inbox — your Habit Tracker just landed. (First time? Check spam/promotions.)</p>
+      <p style="margin-top:10px;color:var(--muted);font-size:13.5px">The winner is revealed Saturday. You'll be first to get it.</p>
+    </div>
+  </div>
+
+  <footer>
+    Trading involves substantial risk. Nothing here is financial advice or a signal service — we teach psychology, discipline and process.
+  </footer>
+
+<script>
+  // === CONFIG ==============================================================
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmIgH9bsLTdZIhhvq1xRruqS2seeNAaM8_knGF3XtStnk9zUwQpeMFNQh-IXIgBpvjdw/exec";
+  // ========================================================================
+
+  var cards = document.querySelectorAll('.card');
+  cards.forEach(function (c) {
+    c.addEventListener('click', function () {
+      cards.forEach(function (x) { x.classList.remove('selected'); });
+      c.classList.add('selected');
+    });
+  });
+
+  var form = document.getElementById('vote-form');
+  var btn = document.getElementById('submit-btn');
+  var errBox = document.getElementById('error-msg');
+  var src = new URLSearchParams(location.search).get('src') || 'direct';
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errBox.style.display = 'none';
+    if (document.getElementById('company').value) return; // honeypot
+
+    var voteEl = document.querySelector('input[name="vote"]:checked');
+    var email = document.getElementById('email').value.trim();
+    var name = document.getElementById('first_name').value.trim();
+
+    if (!voteEl) { showErr('Pick a course first — tap one of the four cards above.'); return; }
+    if (!name || !email || email.indexOf('@') === -1) { showErr('Please fill in your name and a valid email.'); return; }
+    if (SCRIPT_URL.indexOf('PASTE_') === 0) { showErr('We are finishing setup — please try again shortly.'); return; }
+
+    btn.disabled = true;
+    btn.textContent = 'Casting…';
+
+    fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      body: new URLSearchParams({
+        form_type: 'vote', vote: voteEl.value,
+        first_name: name, email: email, source: src
+      })
+    }).then(function () {
+      document.getElementById('vote-area').style.display = 'none';
+      document.getElementById('success-box').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }).catch(function () {
+      showErr('Network hiccup — please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Cast my vote →';
+    });
+  });
+
+  function showErr(msg) { errBox.textContent = msg; errBox.style.display = 'block'; }
+</script>
+</body>
+</html>
