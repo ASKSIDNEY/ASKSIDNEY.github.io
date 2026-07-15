@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free 30-Day Trading Habit Tracker — AskSidney | Fix The Trader</title>
+<meta name="description" content="Get the free 30-Day Trading Habit Calendar & Journal. No signals. No hype. We build disciplined, independent traders.">
+<style>
+  :root{
+    --navy:#0d1b2a;
+    --navy-2:#13263a;
+    --gold:#E8B94A;
+    --gold-dark:#241A05;
+    --text:#f4f1e8;
+    --muted:#a8b3c0;
+    --err:#ff7b6b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--navy);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    line-height:1.55;
+  }
+  .wrap{width:100%;max-width:480px;padding:32px 20px 48px}
+  .brand{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:center;margin-bottom:28px}
+  h1{font-size:clamp(28px,7vw,36px);line-height:1.15;text-align:center;font-weight:800}
+  h1 .gold{color:var(--gold)}
+  .sub{margin:16px auto 8px;text-align:center;color:var(--muted);font-size:16.5px;max-width:420px}
+  .promise{margin:18px 0 26px;background:var(--navy-2);border:1px solid rgba(232,185,74,.25);border-radius:12px;padding:16px 18px;font-size:15px}
+  .promise ul{list-style:none}
+  .promise li{padding:5px 0 5px 26px;position:relative}
+  .promise li::before{content:"✓";position:absolute;left:2px;color:var(--gold);font-weight:700}
+  form{background:var(--navy-2);border-radius:14px;padding:22px 20px;border:1px solid rgba(255,255,255,.06)}
+  label{display:block;font-size:13.5px;color:var(--muted);margin:14px 0 5px}
+  label:first-of-type{margin-top:0}
+  input,select{
+    width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.14);
+    background:var(--navy);color:var(--text);font-size:16px;outline:none;
+  }
+  input:focus,select:focus{border-color:var(--gold)}
+  .opt{color:#7b8794;font-size:12px}
+  button{
+    width:100%;margin-top:20px;padding:15px;border:none;border-radius:10px;cursor:pointer;
+    background:var(--gold);color:var(--gold-dark);font-size:17px;font-weight:800;
+  }
+  button:disabled{opacity:.6;cursor:wait}
+  .trust{margin-top:14px;text-align:center;font-size:13px;color:var(--muted)}
+  .success{display:none;background:var(--navy-2);border:1px solid rgba(232,185,74,.4);border-radius:14px;padding:28px 22px;text-align:center}
+  .success h2{color:var(--gold);font-size:22px;margin-bottom:10px}
+  .success p{font-size:15px;color:var(--text)}
+  .error-msg{display:none;margin-top:12px;color:var(--err);font-size:14px;text-align:center}
+  footer{margin-top:auto;padding:18px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:520px}
+  .hp{position:absolute;left:-5000px;opacity:0;height:0;overflow:hidden}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">AskSidney&nbsp;|&nbsp;Fix The Trader</div>
+
+    <h1>Fix the trader.<br><span class="gold">The trading fixes itself.</span></h1>
+    <p class="sub">Get the free <strong>30-Day Trading Habit Calendar &amp; Journal</strong> — the exact discipline system our community runs on every trading day.</p>
+
+    <div class="promise">
+      <ul>
+        <li>Track the 5 habits that decide whether you survive this game</li>
+        <li>A daily journal that turns every trade into a lesson</li>
+        <li>Your discipline score, visible — proven, not promised</li>
+      </ul>
+    </div>
+
+    <form id="lead-form" autocomplete="on" novalidate>
+      <label for="first_name">First name</label>
+      <input id="first_name" name="first_name" type="text" required maxlength="60" placeholder="Your first name">
+
+      <label for="email">Email — the tracker lands here</label>
+      <input id="email" name="email" type="email" required maxlength="120" placeholder="you@example.com">
+
+      <label for="whatsapp">WhatsApp number <span class="opt">(optional)</span></label>
+      <input id="whatsapp" name="whatsapp" type="tel" maxlength="20" placeholder="+254 ...">
+
+      <label for="experience">How long have you been trading?</label>
+      <select id="experience" name="experience" required>
+        <option value="" disabled selected>Select one</option>
+        <option>Not started yet</option>
+        <option>Under 1 year</option>
+        <option>1–3 years</option>
+        <option>Over 3 years</option>
+      </select>
+
+      <div class="hp" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <button id="submit-btn" type="submit">Send me the free tracker →</button>
+      <p class="trust">No signals. No hype. No spam — unsubscribe anytime.<br>We build <strong>independent</strong> traders.</p>
+      <p class="error-msg" id="error-msg">Something went wrong — please try again in a moment.</p>
+    </form>
+
+    <div class="success" id="success-box">
+      <h2>Check your inbox 📥</h2>
+      <p>Your Habit Tracker is on its way (give it ~1 minute; check spam/promotions the first time).</p>
+      <p style="margin-top:10px;color:var(--muted);font-size:13.5px">Next step is inside the email: join the free community and start your streak.</p>
+    </div>
+  </div>
+
+  <footer>
+    Trading involves substantial risk. Nothing here is financial advice or a signal service — we teach psychology, discipline and process. Partner/broker relationships, where they exist, are always openly disclosed.
+  </footer>
+
+<script>
+  // === CONFIG ==============================================================
+  // Paste the Apps Script Web App /exec URL between the quotes when deployed:
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzmIgH9bsLTdZIhhvq1xRruqS2seeNAaM8_knGF3XtStnk9zUwQpeMFNQh-IXIgBpvjdw/exec";
+  // ========================================================================
+
+  var form = document.getElementById('lead-form');
+  var btn = document.getElementById('submit-btn');
+  var errBox = document.getElementById('error-msg');
+  var src = new URLSearchParams(location.search).get('src') || 'direct';
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    errBox.style.display = 'none';
+
+    // Honeypot: bots fill hidden fields; humans never see it.
+    if (document.getElementById('company').value) return;
+
+    var email = document.getElementById('email').value.trim();
+    var name = document.getElementById('first_name').value.trim();
+    var exp = document.getElementById('experience').value;
+    if (!name || !email || email.indexOf('@') === -1 || !exp) {
+      errBox.textContent = 'Please fill in your name, a valid email, and your experience level.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    if (SCRIPT_URL.indexOf('PASTE_') === 0) {
+      errBox.textContent = 'We are finishing setup — please try again shortly.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    var body = new URLSearchParams({
+      form_type: 'tracker',
+      first_name: name,
+      email: email,
+      whatsapp: document.getElementById('whatsapp').value.trim(),
+      experience: exp,
+      source: src
+    });
+
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: body })
+      .then(function () {
+        form.style.display = 'none';
+        document.getElementById('success-box').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function () {
+        errBox.textContent = 'Network hiccup — please try again.';
+        errBox.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Send me the free tracker →';
+      });
+  });
+</script>
+</body>
+</html>
