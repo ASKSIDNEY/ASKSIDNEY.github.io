@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join the Community — AskSidney | Fix The Trader</title>
+<meta name="description" content="Join ASKSIDNEY | Fix The Trader — the free community that ranks discipline, not profits. Fix the trader and the trading will fix itself.">
+<style>
+  :root{--navy:#0d1b2a;--navy-2:#13263a;--gold:#E8B94A;--gold-dark:#241A05;--text:#f4f1e8;--muted:#a8b3c0;--green:#4caf7d}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.55}
+  .wrap{width:100%;max-width:480px;padding:36px 20px}
+  .brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;text-align:center}
+  h1{font-size:clamp(24px,6.5vw,30px);line-height:1.18;font-weight:800;margin-bottom:8px;text-align:center}
+  h1 .gold{color:var(--gold)}
+  .tag{color:var(--muted);font-size:14.5px;margin-bottom:24px;text-align:center}
+  .card{background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 18px;margin-bottom:16px}
+  .card h2{font-size:15px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
+  .card ul{list-style:none}
+  .card li{padding:5px 0;font-size:14.5px}
+  .card ul li::before{content:"✔";color:var(--green);margin-right:9px;font-weight:700}
+  .steps{counter-reset:s;list-style:none}
+  .steps li{counter-increment:s;padding:7px 0 7px 36px;position:relative;font-size:14.5px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--gold-dark);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0}
+  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 5px;font-weight:600}
+  input[type=text],input[type=email]{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:var(--navy);color:var(--text);font-size:15px}
+  .radio-row{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .radio-row label{display:flex;align-items:center;gap:10px;margin:0;padding:12px 14px;border:1px solid rgba(255,255,255,.15);border-radius:10px;background:var(--navy);cursor:pointer;font-size:14.5px;color:var(--text);font-weight:500}
+  .radio-row label:has(input:checked){border-color:var(--gold);background:rgba(232,185,74,.08)}
+  .btn{display:block;width:100%;padding:15px;border-radius:12px;border:none;cursor:pointer;font-weight:800;font-size:16px;background:var(--gold);color:var(--gold-dark);margin-top:18px;text-align:center;text-decoration:none}
+  .btn.secondary{background:var(--navy-2);color:var(--text);border:1px solid rgba(255,255,255,.18);font-weight:600}
+  .hidden{display:none}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+  .disclose{font-size:12px;color:#7d8895;margin-top:14px}
+  footer{margin-top:auto;padding:16px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:480px}
+  a{color:var(--gold)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="brand">AskSidney&nbsp;|&nbsp;Fix The Trader</div>
+    <h1>Fix the trader<br><span class="gold">and the trading will fix itself.</span></h1>
+    <p class="tag">The free community that ranks discipline, not profits.</p>
+
+    <!-- STATE 1: the pitch + form -->
+    <div id="stepForm">
+      <div class="card">
+        <h2>Inside, free</h2>
+        <ul>
+          <li>The full trading-psychology classroom</li>
+          <li>Daily End-of-Day check-in — builds your discipline score</li>
+          <li>Live classes Tue &amp; Thu, 8pm EAT</li>
+          <li>The Saturday discipline leaderboard</li>
+          <li>Free Habit Calendar &amp; Journal</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>How joining works</h2>
+        <ol class="steps">
+          <li>Open a <b>live Valetax account</b>, funded with any amount — discipline is only tested when real money is on the line</li>
+          <li>Request to join on Skool using your Valetax email</li>
+          <li>We verify &amp; approve — then the classroom, check-ins and Habit Calendar are yours</li>
+        </ol>
+        <p class="disclose">Transparency: Sidney is an introducing broker with Valetax — the broker pays a small commission when you trade, at no extra cost to you. That's what keeps this mentorship 100% free.</p>
+      </div>
+
+      <div class="card">
+        <h2>Start here</h2>
+        <form id="joinForm">
+          <label for="fname">First name</label>
+          <input type="text" id="fname" required autocomplete="given-name">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="email">
+          <label>Do you have a live Valetax account?</label>
+          <div class="radio-row">
+            <label><input type="radio" name="vtx" value="yes" required> Yes, I trade with Valetax</label>
+            <label><input type="radio" name="vtx" value="about"> I'm about to create one</label>
+            <label><input type="radio" name="vtx" value="no"> Not yet</label>
+          </div>
+          <div id="vtxEmailWrap" class="hidden">
+            <label for="vtxEmail">The email you registered with Valetax</label>
+            <input type="email" id="vtxEmail" autocomplete="email">
+          </div>
+          <button class="btn" type="submit" id="goBtn">Continue →</button>
+          <p class="note">Takes 20 seconds. No spam — only your access steps.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- STATE 2a: has account → to Skool -->
+    <div id="stepSkool" class="hidden">
+      <div class="card">
+        <h2>✅ You're ready — one tap left</h2>
+        <ol class="steps">
+          <li>Tap the button below — it opens our community page on Skool</li>
+          <li>Tap <b>JOIN GROUP</b> and answer the questions <b>with your Valetax email</b></li>
+          <li>You'll be approved (usually within 24 hours) — then check your inbox for the app link</li>
+        </ol>
+        <a class="btn" id="skoolBtn" href="https://www.skool.com/asksidney-fix-the-trader-2642/about">Open the community on Skool →</a>
+        <p class="note" id="skoolCountdown">Taking you there automatically…</p>
+      </div>
+    </div>
+
+    <!-- STATE 2b: no account → to Valetax -->
+    <div id="stepValetax" class="hidden">
+      <div class="card">
+        <h2>Your next step: open your live account</h2>
+        <ol class="steps">
+          <li>Open and fund your Valetax account with <b>any amount</b> — takes about 10 minutes</li>
+          <li>Check your inbox 📩 — we've just emailed you these steps so you can't lose them</li>
+          <li>Once funded, come back and join on Skool with your registered Valetax email — you'll be fast-tracked</li>
+        </ol>
+        <a class="btn" href="https://ma.valetax.com/p/6947348">Open my Valetax account →</a>
+        <a class="btn secondary" href="https://www.skool.com/asksidney-fix-the-trader-2642/about">Already done? Go to the community →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Trading involves substantial risk. Nothing here is financial advice or a signal service. Partner/broker relationships, where they exist, are always openly disclosed.
+  </footer>
+
+<script>
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzmIgH9bsLTdZIhhvq1xRruqS2seeNAaM8_knGF3XtStnk9zUwQpeMFNQh-IXIgBpvjdw/exec';
+
+  // Show the Valetax-email field only when "Yes"
+  document.querySelectorAll('input[name="vtx"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      var yes = document.querySelector('input[name="vtx"]:checked').value === 'yes';
+      document.getElementById('vtxEmailWrap').classList.toggle('hidden', !yes);
+      document.getElementById('vtxEmail').required = yes;
+    });
+  });
+
+  document.getElementById('joinForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = document.getElementById('goBtn');
+    btn.disabled = true; btn.textContent = 'One moment…';
+
+    var vtx = document.querySelector('input[name="vtx"]:checked').value;
+    var params = new URLSearchParams({
+      form_type: 'join',
+      first_name: document.getElementById('fname').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      valetax: vtx,
+      valetax_email: (document.getElementById('vtxEmail').value || '').trim(),
+      source: new URLSearchParams(location.search).get('src') || 'join-page'
+    });
+
+    // Fire-and-forget capture (same pattern as the tracker page)
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params }).catch(function(){});
+
+    // Route by their answer
+    setTimeout(function () {
+      document.getElementById('stepForm').classList.add('hidden');
+      if (vtx === 'yes') {
+        document.getElementById('stepSkool').classList.remove('hidden');
+        window.scrollTo(0, 0);
+        setTimeout(function () { window.location.href = document.getElementById('skoolBtn').href; }, 3500);
+      } else {
+        document.getElementById('stepValetax').classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+    }, 600);
+  });
+</script>
+</body>
+</html>
