@@ -1,49 +1,39 @@
-# AskSidney — Landing Pages (GitHub Pages)
+# ASKSIDNEY | Fix The Trader — hub site
 
-Free capture stack for **AskSidney | Fix The Trader**: GitHub Pages (hosting) + Google Apps Script (capture + delivery) + Google Sheet (CRM v0). $0/month.
+Static marketing + funnel site for the AskSidney trading-psychology community.
+Brand line: **"Fix the trader and the trading will fix itself."** Positioning: ranks **discipline, not profits** — no signals, ever.
 
-**Live URLs (once Pages is enabled):**
-- `https://asksidney.github.io/` → redirects to `/tracker/`
-- `https://asksidney.github.io/tracker/` — free Habit Tracker lead magnet (always-on, link-in-bio)
-- `https://asksidney.github.io/vote/` — campaign vote page *(Step 2 — coming)*
+> **Single source of truth:** the full project state, decisions, and strategy live in the Google Drive "brain" — doc **"00 — MASTER STATE & HANDOVER"**. Read that first. This README documents the *site* only.
 
-## Structure
+## Pages
 
-```
-index.html            → root redirect to /tracker/
-tracker/index.html    → lead magnet page (posts form_type=tracker)
-vote/index.html       → campaign page (posts form_type=vote) [Step 2]
-apps-script/Code.gs   → the CRM engine (lives in Google Sheets, versioned here)
-```
+| Path | Purpose | Posts to CRM? |
+|---|---|---|
+| `/` (`index.html`) | Hub. 3 buttons in fixed order: **1) Trade with me** (Valetax IB link — the door) · **2) Join the free community** (→ `/join/`) · **3) Fastest way to scale up** (WeMaster, code **SID20**). | no |
+| `/join/` (`join/index.html`) | Capture funnel. Sells the community, shows the 3 join steps, captures name + email + Valetax status. Has-account → routes to Skool; no-account → routes to the home Trade-with-me button and auto-fires Email 1. | **yes** (`form_type=join`) |
+| `/tracker/` (`tracker/index.html`) | Free 30-day Habit Tracker lead magnet. | **yes** (`form_type=tracker`) |
+| `/vote/` (`vote/index.html`) | "You pick what I build next" course vote + tracker delivery. | **yes** (`form_type=vote`) |
 
-## Setup — three phases
+## Stack
 
-### Phase A — Hosting (GitHub, one time)
-1. This repo must be **public** and named `ASKSIDNEY.github.io`.
-2. Settings → Pages → Source: **Deploy from a branch** → Branch: `main` / `/ (root)` → Save.
-3. Site appears at `https://asksidney.github.io/` within ~2 minutes.
+- **Hosting:** GitHub Pages off `main`, served at https://asksidney.github.io (single-file HTML pages, inline CSS/JS, no build step).
+- **Backend:** one Google Apps Script Web App (bound to the `AskSidney_CRM_v0` sheet) receives all form posts, logs to the sheet, and sends member emails via MailApp from Sidney's Gmail. Source lives in the Drive brain (`asksidney_crm` script, currently **v1.3**).
+- **CRM script `/exec` URL** (all pages POST here — keep in sync):
+  `https://script.google.com/macros/s/AKfycbyQHSgCLS6q6WfPxTyOhzs0co_KFm8R_gdINyGJFLX_ncfchNLFff2WS5OGJgMknLemyA/exec`
 
-### Phase B — CRM engine (Google, one time)
-1. Create a Google Sheet named `AskSidney_CRM_v0` (on Sidney's Google account).
-2. Extensions → Apps Script → paste all of `apps-script/Code.gs` over the default file → Save.
-3. Deploy → New deployment → **Web app** · Execute as: **Me** · Who has access: **Anyone** → Deploy → authorize → copy the **`/exec` URL**.
-4. Send that URL to Claude — it gets inserted into the pages (the `SCRIPT_URL` constant) and pushed. Done.
+## Deploy / edit rules (read before touching anything)
 
-### Phase C — Test end-to-end
-1. Open `/tracker/`, submit with a real email.
-2. Within ~10s: a row appears in the sheet + the tracker email arrives from Gmail.
-3. Submit again with the same email → row marked `DUPLICATE`, no second email.
+1. **Editing pages:** commit directly to `main`; GitHub Pages redeploys automatically. Direct `git` from some environments is blocked — edits are made via the Zapier GitHub connector or the GitHub web UI.
+2. **The Apps Script URL is shared by 4 pages** (`/join`, `/tracker`, `/vote`, and the script itself). If the script is redeployed as a **New deployment**, the `/exec` URL changes and every page breaks. **Always redeploy as "Manage deployments → Edit → New version"** on the existing deployment so the URL stays stable.
+3. **Copy standards (brand law):**
+   - Tagline everywhere: "Fix the trader and the trading will fix itself."
+   - Broker requirement wording: **"open a live Valetax account and fund"** — never "$50" or "funded with any amount".
+   - Disclosure: Sidney is an **"introducing partner with Valetax"** — never "broker".
+   - The Valetax referral link appears only under **Trade with me**, the Skool About page, and Email 1 — **not** on `/join`.
+   - Every page keeps the risk disclaimer footer.
 
-## How updates work
-Claude edits and pushes; Pages redeploys automatically in ~1–2 minutes. No build step, no dependencies — plain HTML.
+## Related assets (not in this repo)
 
-## Source tagging
-Share links with `?src=tiktok`, `?src=ig`, `?src=bio` — the page passes the tag into the CRM's Source column.
-
-## Custom domain (later — Decision D-020)
-When the domain is bought (before the 5K reactivation blast): add it in Settings → Pages → Custom domain (creates a `CNAME` file), point DNS `A/ALIAS` records at GitHub Pages, keep HTTPS enforced. URLs upgrade; nothing gets rebuilt.
-
-## Known limits (by design — CRM v0)
-- Gmail ~100 sends/day → move delivery to Brevo free if signups approach 80/day.
-- No drip sequences, no broadcasts — the 5K reactivation waits for Brevo + custom domain.
-- Everything exports via CSV; nothing is lost by starting here.
+- Skool community: https://www.skool.com/asksidney-fix-the-trader-2642 (no API — human-operated)
+- CRM sheet `AskSidney_CRM_v0` + Apps Script (Drive)
+- Drive brain (decisions, strategy, SOPs) — start at "00 — MASTER STATE & HANDOVER"
