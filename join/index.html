@@ -33,6 +33,10 @@
   .hidden{display:none}
   .note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
   .disclose{font-size:12px;color:#7d8895;margin-top:14px}
+  .emailbox{width:100%;background:var(--navy);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:var(--text);font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:13px 14px;line-height:1.5;white-space:pre-wrap;resize:vertical;min-height:210px}
+  .addr{background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 10px;font-size:13px;margin:6px 0;word-break:break-all}
+  .addr b{color:var(--gold)}
+  .copied{color:var(--green);font-size:12.5px;text-align:center;margin-top:8px;min-height:16px}
   footer{margin-top:auto;padding:16px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:480px}
   a{color:var(--gold)}
 </style>
@@ -76,7 +80,8 @@
           <input type="email" id="email" required autocomplete="email">
           <label>Do you have a live Valetax account?</label>
           <div class="radio-row">
-            <label><input type="radio" name="vtx" value="yes" required> Yes, I trade with Valetax</label>
+            <label><input type="radio" name="vtx" value="yes" required> Yes — and it's already under AskSidney</label>
+            <label><input type="radio" name="vtx" value="reparent"> Yes — but I'm not sure it's under Sidney</label>
             <label><input type="radio" name="vtx" value="about"> I'm about to create one</label>
             <label><input type="radio" name="vtx" value="no"> Not yet</label>
           </div>
@@ -86,7 +91,7 @@
       </div>
     </div>
 
-    <!-- STATE 2a: has account → to Skool -->
+    <!-- STATE 2a: has account, under us → to Skool -->
     <div id="stepSkool" class="hidden">
       <div class="card">
         <h2>✅ You're ready — one tap left</h2>
@@ -113,6 +118,28 @@
         <a class="btn secondary" href="https://www.skool.com/asksidney-fix-the-trader-2642/about">Account already funded? Go to the community →</a>
       </div>
     </div>
+
+    <!-- STATE 2c: has account but maybe under another partner → re-parent under AskSidney -->
+    <div id="stepReparent" class="hidden">
+      <div class="card">
+        <h2>Let's move your account under AskSidney</h2>
+        <p style="font-size:14.5px;margin-bottom:6px">We looked up your email and it's currently registered under a different partner. Here are the steps to sort it out and join the group — Valetax moves the account for you, and it takes about two minutes.</p>
+        <ol class="steps">
+          <li><b>Log in to your Valetax account</b> and raise a support ticket on the portal asking for your account to be moved to <b>AsksydneyFx</b></li>
+          <li><b>Send the email below</b> to Valetax support (cc the account manager) — just copy, paste and send from your own email:</li>
+        </ol>
+        <div class="addr">To: <b>contact@valetax.com</b></div>
+        <div class="addr">Cc: <b>Samuel.nyaga@valetax.com</b></div>
+        <textarea class="emailbox" id="reparentEmail" readonly></textarea>
+        <button class="btn" type="button" id="copyBtn">Copy the email →</button>
+        <p class="copied" id="copiedMsg"></p>
+        <ol class="steps" style="margin-top:6px;counter-reset:s 2">
+          <li><b>Then reply to the email we just sent you</b> — once Valetax confirms the move, we approve you into the community straight away</li>
+        </ol>
+        <p class="note" id="reparentInbox">📩 We've also emailed these exact steps to your inbox so you can't lose them.</p>
+        <a class="btn secondary" href="https://www.skool.com/asksidney-fix-the-trader-2642/about" style="margin-top:14px">Already confirmed under AskSidney? Go to the community →</a>
+      </div>
+    </div>
   </div>
 
   <footer>
@@ -122,19 +149,31 @@
 <script>
   var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQHSgCLS6q6WfPxTyOhzs0co_KFm8R_gdINyGJFLX_ncfchNLFff2WS5OGJgMknLemyA/exec';
 
+  // Builds the copy-paste re-parenting email, personalised with what they typed.
+  function buildReparentEmail(name, email) {
+    return 'Subject: Request to migrate my account to AsksydneyFx\n\n' +
+      'Hello Valetax support,\n\n' +
+      'I wish to request for my account to be migrated to AsksydneyFx (sidneynyaga@gmail.com).\n\n' +
+      "I'm currently accessing his trading community whereby I am receiving constant trading support, trading signals and daily check-ins.\n\n" +
+      'This will be highly regarded.\n\n' +
+      (name || '[Your name]') + '\n' +
+      (email || '[your email]');
+  }
+
   document.getElementById('joinForm').addEventListener('submit', function (ev) {
     ev.preventDefault();
     var btn = document.getElementById('goBtn');
     btn.disabled = true; btn.textContent = 'One moment…';
 
     var vtx = document.querySelector('input[name="vtx"]:checked').value;
+    var name = document.getElementById('fname').value.trim();
     var email = document.getElementById('email').value.trim();
     var params = new URLSearchParams({
-      form_type: 'join',
-      first_name: document.getElementById('fname').value.trim(),
+      form_type: vtx === 'reparent' ? 'reparent' : 'join',
+      first_name: name,
       email: email,
       valetax: vtx,
-      valetax_email: vtx === 'yes' ? email : '',
+      valetax_email: (vtx === 'yes' || vtx === 'reparent') ? email : '',
       source: new URLSearchParams(location.search).get('src') || 'join-page'
     });
 
@@ -148,11 +187,28 @@
         document.getElementById('stepSkool').classList.remove('hidden');
         window.scrollTo(0, 0);
         setTimeout(function () { window.location.href = document.getElementById('skoolBtn').href; }, 3500);
+      } else if (vtx === 'reparent') {
+        document.getElementById('reparentEmail').value = buildReparentEmail(name, email);
+        if (email) { document.getElementById('reparentInbox').textContent = '📩 We’ve also emailed these exact steps to ' + email + ' so you can’t lose them.'; }
+        document.getElementById('stepReparent').classList.remove('hidden');
+        window.scrollTo(0, 0);
       } else {
         document.getElementById('stepValetax').classList.remove('hidden');
         window.scrollTo(0, 0);
       }
     }, 600);
+  });
+
+  // Copy button for the re-parenting email
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var ta = document.getElementById('reparentEmail');
+    var msg = document.getElementById('copiedMsg');
+    var done = function () { msg.textContent = 'Copied — now paste it into a new email to contact@valetax.com'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+    } else {
+      ta.select(); document.execCommand('copy'); done();
+    }
   });
 </script>
 </body>
