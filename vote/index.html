@@ -5,50 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>You Pick What I Build Next — AskSidney | Fix The Trader</title>
 <meta name="description" content="Four free trading-psychology courses. You decide which one gets built first. Voters get it before anyone else.">
+<meta name="theme-color" content="#0A1522">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --navy:#0d1b2a; --navy-2:#13263a; --gold:#E8B94A; --gold-dark:#241A05;
-    --text:#f4f1e8; --muted:#a8b3c0; --err:#ff7b6b;
-  }
+  :root{--field:#0A1522;--navy:#0D1B2A;--surface:#13263A;--gold:#E8B94A;--gold-dark:#241A05;--text:#F4F1E8;--muted:#A8B3C0;--line:rgba(255,255,255,.08);--err:#FF7B6B}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.5}
-  .wrap{width:100%;max-width:520px;padding:28px 18px 44px}
-  .brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;text-align:center;margin-bottom:22px}
-  h1{font-size:clamp(26px,7vw,34px);line-height:1.15;text-align:center;font-weight:800}
-  .sub{margin:12px auto 22px;text-align:center;color:var(--muted);font-size:15.5px;max-width:440px}
+  body{background:linear-gradient(180deg,var(--field) 0%,var(--navy) 100%);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.5;-webkit-font-smoothing:antialiased}
+  ::selection{background:var(--gold);color:var(--gold-dark)}
+  .wrap{width:100%;max-width:520px;padding:32px 18px 44px}
+  .kicker{font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:600;text-align:center;margin-bottom:22px}
+  .kicker a{color:inherit;text-decoration:none}
+  h1{font-family:Fraunces,Georgia,serif;font-size:clamp(26px,7vw,34px);line-height:1.12;text-align:center;font-weight:700;letter-spacing:-.01em}
+  h1 .gold{color:var(--gold)}
+  .sub{margin:12px auto 24px;text-align:center;color:var(--muted);font-size:15.5px;max-width:440px}
   .sub strong{color:var(--text)}
   .ballot{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
-  .card{
-    display:flex;gap:14px;align-items:flex-start;cursor:pointer;
-    background:var(--navy-2);border:2px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px;
-    transition:border-color .12s;
-  }
+  .card{display:flex;gap:14px;align-items:flex-start;cursor:pointer;background:var(--surface);border:2px solid var(--line);border-radius:14px;padding:15px 16px;transition:border-color .15s,transform .18s ease-out;animation:rise .45s ease-out both}
+  .card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .card:hover{border-color:rgba(232,185,74,.45)}
   .card input{margin-top:4px;accent-color:var(--gold);width:18px;height:18px;flex:none}
   .card.selected{border-color:var(--gold)}
   .card .letter{font-weight:800;color:var(--gold);margin-right:2px}
   .card h3{font-size:15.5px;font-weight:700;display:inline}
   .card p{font-size:13.5px;color:var(--muted);margin-top:3px}
-  form.details{background:var(--navy-2);border-radius:14px;padding:20px 18px;border:1px solid rgba(255,255,255,.06)}
-  label{display:block;font-size:13.5px;color:var(--muted);margin:12px 0 5px}
+  form.details{background:var(--surface);border-radius:14px;padding:22px 18px;border:1px solid var(--line)}
+  label{display:block;font-size:13.5px;color:var(--muted);margin:12px 0 6px;font-weight:600}
   label:first-of-type{margin-top:0}
-  input[type=text],input[type=email]{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.14);background:var(--navy);color:var(--text);font-size:16px;outline:none}
+  input[type=text],input[type=email]{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:var(--navy);color:var(--text);font-size:16px;outline:none;transition:border-color .15s}
   input:focus{border-color:var(--gold)}
-  button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:10px;cursor:pointer;background:var(--gold);color:var(--gold-dark);font-size:17px;font-weight:800}
-  button:disabled{opacity:.6;cursor:wait}
+  button{width:100%;margin-top:18px;padding:15px;border:none;border-radius:12px;cursor:pointer;background:var(--gold);color:var(--gold-dark);font-size:17px;font-weight:800;font-family:inherit;transition:transform .18s ease-out,box-shadow .18s ease-out}
+  button:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(232,185,74,.25)}
+  button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+  button:disabled{opacity:.6;cursor:wait;transform:none}
   .fine{margin-top:12px;text-align:center;font-size:12.5px;color:var(--muted)}
-  .success{display:none;background:var(--navy-2);border:1px solid rgba(232,185,74,.4);border-radius:14px;padding:28px 22px;text-align:center}
-  .success h2{color:var(--gold);font-size:22px;margin-bottom:10px}
+  .success{display:none;background:var(--surface);border:1px solid rgba(232,185,74,.4);border-radius:14px;padding:30px 22px;text-align:center}
+  .success h2{font-family:Fraunces,Georgia,serif;color:var(--gold);font-size:23px;margin-bottom:10px}
   .success p{font-size:15px}
   .error-msg{display:none;margin-top:12px;color:var(--err);font-size:14px;text-align:center}
-  footer{margin-top:auto;padding:16px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:520px}
+  footer{margin-top:auto;padding:18px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:520px;line-height:1.6}
   .hp{position:absolute;left:-5000px;opacity:0;height:0;overflow:hidden}
+  @media (prefers-reduced-motion: reduce){.card{animation:none}button{transition:none}}
 </style>
 </head>
 <body>
   <div class="wrap">
-    <div class="brand">AskSidney&nbsp;|&nbsp;Fix The Trader</div>
+    <div class="kicker"><a href="/">AskSidney&nbsp;·&nbsp;Fix The Trader</a></div>
 
-    <h1>You pick what I <span style="color:var(--gold)">build next.</span></h1>
+    <h1>You pick what I <span class="gold">build next.</span></h1>
     <p class="sub">Four free courses. I'm building all of them eventually — <strong>you decide what comes first.</strong> Voters get the winner before anyone else, plus the free Habit Tracker today.</p>
 
     <div id="vote-area">
@@ -91,9 +96,7 @@
   </footer>
 
 <script>
-  // === CONFIG ==============================================================
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQHSgCLS6q6WfPxTyOhzs0co_KFm8R_gdINyGJFLX_ncfchNLFff2WS5OGJgMknLemyA/exec";
-  // ========================================================================
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyCR--5fnXhTqflRoIUxGFp0I31r8ZTUdB0psCPimljwJ3_J1ObZtiXVcYBZECXR0gA/exec";
 
   var cards = document.querySelectorAll('.card');
   cards.forEach(function (c) {
@@ -119,7 +122,6 @@
 
     if (!voteEl) { showErr('Pick a course first — tap one of the four cards above.'); return; }
     if (!name || !email || email.indexOf('@') === -1) { showErr('Please fill in your name and a valid email.'); return; }
-    if (SCRIPT_URL.indexOf('PASTE_') === 0) { showErr('We are finishing setup — please try again shortly.'); return; }
 
     btn.disabled = true;
     btn.textContent = 'Casting…';
