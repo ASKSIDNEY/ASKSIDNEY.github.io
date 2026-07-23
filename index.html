@@ -3,54 +3,229 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AskSidney | Fix The Trader</title>
-<meta name="description" content="Fix the trader and the trading will fix itself. Free community, trading psychology — proven, not promised.">
+<title>Join the Community — AskSidney | Fix The Trader</title>
+<meta name="description" content="Join ASKSIDNEY | Fix The Trader — the free community that ranks discipline, not profits. Fix the trader and the trading will fix itself.">
 <style>
-  :root{--navy:#0d1b2a;--navy-2:#13263a;--gold:#E8B94A;--gold-dark:#241A05;--text:#f4f1e8;--muted:#a8b3c0}
+  :root{--navy:#0d1b2a;--navy-2:#13263a;--gold:#E8B94A;--gold-dark:#241A05;--text:#f4f1e8;--muted:#a8b3c0;--green:#4caf7d}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.5}
-  .wrap{width:100%;max-width:440px;padding:44px 20px;text-align:center}
-  .brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
-  h1{font-size:clamp(26px,7vw,34px);line-height:1.15;font-weight:800;margin-bottom:8px}
+  body{background:var(--navy);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;line-height:1.55}
+  .wrap{width:100%;max-width:480px;padding:36px 20px}
+  .brand{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px;text-align:center}
+  h1{font-size:clamp(24px,6.5vw,30px);line-height:1.18;font-weight:800;margin-bottom:8px;text-align:center}
   h1 .gold{color:var(--gold)}
-  .tag{color:var(--muted);font-size:15px;margin-bottom:30px}
-  .links{display:flex;flex-direction:column;gap:12px}
-  a.btn{
-    display:block;padding:16px 18px;border-radius:12px;text-decoration:none;font-weight:700;font-size:16px;
-    background:var(--navy-2);color:var(--text);border:1px solid rgba(255,255,255,.1);
-  }
-  a.btn small{display:block;font-weight:400;font-size:12.5px;color:var(--muted);margin-top:3px}
-  a.btn.primary{background:var(--gold);color:var(--gold-dark);border:none}
-  a.btn.primary small{color:rgba(36,26,5,.75)}
+  .tag{color:var(--muted);font-size:14.5px;margin-bottom:24px;text-align:center}
+  .card{background:var(--navy-2);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 18px;margin-bottom:16px}
+  .card h2{font-size:15px;color:var(--gold);letter-spacing:.05em;text-transform:uppercase;margin-bottom:10px}
+  .card ul{list-style:none}
+  .card li{padding:5px 0;font-size:14.5px}
+  .card ul li::before{content:"✔";color:var(--green);margin-right:9px;font-weight:700}
+  .steps{counter-reset:s;list-style:none}
+  .steps li{counter-increment:s;padding:7px 0 7px 36px;position:relative;font-size:14.5px}
+  .steps li::before{content:counter(s);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--gold-dark);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;margin:0}
+  .priority{font-size:13px;color:var(--gold);margin-top:10px;font-weight:600}
+  label{display:block;font-size:13px;color:var(--muted);margin:14px 0 5px;font-weight:600}
+  input[type=text],input[type=email]{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:var(--navy);color:var(--text);font-size:15px}
+  .radio-row{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  .radio-row label{display:flex;align-items:center;gap:10px;margin:0;padding:12px 14px;border:1px solid rgba(255,255,255,.15);border-radius:10px;background:var(--navy);cursor:pointer;font-size:14.5px;color:var(--text);font-weight:500}
+  .radio-row label:has(input:checked){border-color:var(--gold);background:rgba(232,185,74,.08)}
+  .btn{display:block;width:100%;padding:15px;border-radius:12px;border:none;cursor:pointer;font-weight:800;font-size:16px;background:var(--gold);color:var(--gold-dark);margin-top:18px;text-align:center;text-decoration:none}
+  .btn.secondary{background:var(--navy-2);color:var(--text);border:1px solid rgba(255,255,255,.18);font-weight:600}
+  .hidden{display:none}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center}
+  .disclose{font-size:12px;color:#7d8895;margin-top:14px}
+  .emailbox{width:100%;background:var(--navy);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:var(--text);font-size:13px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;padding:13px 14px;line-height:1.5;white-space:pre-wrap;resize:vertical;min-height:210px}
+  .addr{background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:8px 10px;font-size:13px;margin:6px 0;word-break:break-all}
+  .addr b{color:var(--gold)}
+  .copied{color:var(--green);font-size:12.5px;text-align:center;margin-top:8px;min-height:16px}
   footer{margin-top:auto;padding:16px;text-align:center;font-size:11.5px;color:#5d6a78;max-width:480px}
+  a{color:var(--gold)}
 </style>
 </head>
 <body>
   <div class="wrap">
     <div class="brand">AskSidney&nbsp;|&nbsp;Fix The Trader</div>
     <h1>Fix the trader<br><span class="gold">and the trading will fix itself.</span></h1>
-    <p class="tag">Psychology, discipline and process — proven, not promised.</p>
+    <p class="tag">The free community that ranks discipline, not profits.</p>
 
-    <div class="links">
-      <a class="btn primary" href="https://ma.valetax.com/p/6947348">
-        📈 Trade with me
-        <small>Open your live Valetax account — the door into the free community</small>
-      </a>
+    <!-- STATE 1: the pitch + form -->
+    <div id="stepForm">
+      <div class="card">
+        <h2>Inside, free</h2>
+        <ul>
+          <li>The full trading-psychology classroom</li>
+          <li>Daily End-of-Day check-in — builds your discipline score</li>
+          <li>Live classes Tue &amp; Thu, 8pm EAT</li>
+          <li>The Saturday discipline leaderboard</li>
+          <li>Free Habit Calendar &amp; Journal</li>
+        </ul>
+      </div>
 
-      <a class="btn" href="/join/">
-        👥 Join the free community
-        <small>See what's inside + your 3 steps in — starts here</small>
-      </a>
+      <div class="card">
+        <h2>How to join</h2>
+        <ol class="steps">
+          <li><b>Open a live Valetax account and fund</b> — discipline is only tested when real money is on the line. Use the <b>Trade with me</b> button on the home page</li>
+          <li><b>Request to join on Skool</b> using your Valetax email, and download the Skool app</li>
+          <li><b>We verify and approve</b> — free classroom, check-ins and Habit Calendar after approval</li>
+        </ol>
+        <p class="priority">⭐ Priority for approval is given to traders with a live Valetax account.</p>
+        <p class="disclose">Transparency: Sidney is an introducing partner with Valetax — the broker pays a small commission when you trade, at no extra cost to you. That's what keeps this mentorship 100% free.</p>
+      </div>
 
-      <a class="btn" href="https://my.wemastertrade.com/register?ref=261745">
-        🚀 Fastest way to scale up
-        <small>Trade bigger with the best prop firm · Use SID20 for a 20% discount</small>
-      </a>
+      <div class="card">
+        <h2>Start here</h2>
+        <form id="joinForm">
+          <label for="fname">First name</label>
+          <input type="text" id="fname" required autocomplete="given-name">
+          <label for="email">Email — if you have a Valetax account, use the one you registered with</label>
+          <input type="email" id="email" required autocomplete="email">
+          <label>How long have you been trading?</label>
+          <div class="radio-row">
+            <label><input type="radio" name="exp" value="Under 1 year" required> Under 1 year</label>
+            <label><input type="radio" name="exp" value="1 - 3 years"> 1 – 3 years</label>
+            <label><input type="radio" name="exp" value="3+ years"> 3+ years</label>
+          </div>
+          <label>Do you have a live Valetax account?</label>
+          <div class="radio-row">
+            <label><input type="radio" name="vtx" value="yes" required> Yes — and it's already under AskSidney</label>
+            <label><input type="radio" name="vtx" value="reparent"> Yes — but I'm not sure it's under Sidney</label>
+            <label><input type="radio" name="vtx" value="about"> I'm about to create one</label>
+            <label><input type="radio" name="vtx" value="no"> Not yet</label>
+          </div>
+          <button class="btn" type="submit" id="goBtn">Continue →</button>
+          <p class="note">Takes 20 seconds. No spam — only your access steps.</p>
+        </form>
+      </div>
+    </div>
+
+    <!-- STATE 2a: has account, under us → to Skool -->
+    <div id="stepSkool" class="hidden">
+      <div class="card">
+        <h2>✅ You're ready — one tap left</h2>
+        <ol class="steps">
+          <li>Tap the button below — it opens our community page on Skool</li>
+          <li>Tap <b>JOIN GROUP</b> and answer the questions <b>with your Valetax email</b></li>
+          <li>You'll be verified and approved — then check your inbox for the app link</li>
+        </ol>
+        <a class="btn" id="skoolBtn" href="https://www.skool.com/asksidney-fix-the-trader-2642/about">Open the community on Skool →</a>
+        <p class="note" id="skoolCountdown">Taking you there automatically…</p>
+      </div>
+    </div>
+
+    <!-- STATE 2b: no account → open account first (link lives under Trade with me) -->
+    <div id="stepValetax" class="hidden">
+      <div class="card">
+        <h2>First step: open your live account</h2>
+        <ol class="steps">
+          <li>Go to the home page and tap <b>📈 Trade with me</b> — open a live Valetax account and fund (about 10 minutes)</li>
+          <li>Check your inbox 📩 — we've just emailed you the steps so you can't lose them</li>
+          <li>Then request to join on Skool with your registered Valetax email — priority approval</li>
+        </ol>
+        <a class="btn" href="/">Take me to Trade with me →</a>
+        <a class="btn secondary" href="https://www.skool.com/asksidney-fix-the-trader-2642/about">Account already funded? Go to the community →</a>
+      </div>
+    </div>
+
+    <!-- STATE 2c: has account but maybe under another partner → re-parent under AskSidney -->
+    <div id="stepReparent" class="hidden">
+      <div class="card">
+        <h2>Let's move your account under AskSidney</h2>
+        <p style="font-size:14.5px;margin-bottom:6px">We looked up your email and it's currently registered under a different partner. Here are the steps to sort it out and join the group — Valetax moves the account for you, and it takes about two minutes.</p>
+        <ol class="steps">
+          <li><b>Log in to your Valetax account</b> and raise a support ticket on the portal asking for your account to be moved to <b>AsksydneyFx</b></li>
+          <li><b>Send the email below</b> to Valetax support (cc the account manager) — just copy, paste and send from your own email:</li>
+        </ol>
+        <div class="addr">To: <b>contact@valetax.com</b></div>
+        <div class="addr">Cc: <b>Samuel.nyaga@valetax.com</b></div>
+        <textarea class="emailbox" id="reparentEmail" readonly></textarea>
+        <a class="btn" id="mailtoBtn" href="#">Open in your email app →</a>
+        <button class="btn secondary" type="button" id="copyBtn">Or copy the email →</button>
+        <p class="copied" id="copiedMsg"></p>
+        <ol class="steps" style="margin-top:6px;counter-reset:s 2">
+          <li><b>Then reply to the email we just sent you</b> — once Valetax confirms the move, we approve you into the community straight away</li>
+        </ol>
+        <p class="note" id="reparentInbox">📩 We've also emailed these exact steps to your inbox so you can't lose them.</p>
+        <a class="btn secondary" href="https://www.skool.com/asksidney-fix-the-trader-2642/about" style="margin-top:14px">Already confirmed under AskSidney? Go to the community →</a>
+      </div>
     </div>
   </div>
 
   <footer>
     Trading involves substantial risk. Nothing here is financial advice or a signal service. Partner relationships, where they exist, are always openly disclosed.
   </footer>
+
+<script>
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQHSgCLS6q6WfPxTyOhzs0co_KFm8R_gdINyGJFLX_ncfchNLFff2WS5OGJgMknLemyA/exec';
+
+  // Builds the re-parenting email, personalised with what they typed.
+  var REPARENT_TO = 'contact@valetax.com';
+  var REPARENT_CC = 'Samuel.nyaga@valetax.com';
+  var REPARENT_SUBJECT = 'Request to migrate my account to AsksydneyFx';
+  function buildReparentBody(name, email) {
+    return 'Hello Valetax support,\n\n' +
+      'I wish to request for my account to be migrated to AsksydneyFx (sidneynyaga@gmail.com).\n\n' +
+      "I'm currently accessing his trading community whereby I am receiving constant trading support, trading signals and daily check-ins.\n\n" +
+      'This will be highly regarded.\n\n' +
+      (name || '[Your name]') + '\n' +
+      (email || '[your email]');
+  }
+
+  document.getElementById('joinForm').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var btn = document.getElementById('goBtn');
+    btn.disabled = true; btn.textContent = 'One moment…';
+
+    var vtx = document.querySelector('input[name="vtx"]:checked').value;
+    var name = document.getElementById('fname').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var expEl = document.querySelector('input[name="exp"]:checked');
+    var params = new URLSearchParams({
+      form_type: vtx === 'reparent' ? 'reparent' : 'join',
+      first_name: name,
+      email: email,
+      experience: expEl ? expEl.value : '',
+      valetax: vtx,
+      valetax_email: (vtx === 'yes' || vtx === 'reparent') ? email : '',
+      source: new URLSearchParams(location.search).get('src') || 'join-page'
+    });
+
+    // Fire-and-forget capture (same pattern as the tracker page)
+    fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: params }).catch(function(){});
+
+    // Route by their answer
+    setTimeout(function () {
+      document.getElementById('stepForm').classList.add('hidden');
+      if (vtx === 'yes') {
+        document.getElementById('stepSkool').classList.remove('hidden');
+        window.scrollTo(0, 0);
+        setTimeout(function () { window.location.href = document.getElementById('skoolBtn').href; }, 3500);
+      } else if (vtx === 'reparent') {
+        var body = buildReparentBody(name, email);
+        document.getElementById('reparentEmail').value = 'To: ' + REPARENT_TO + '\nCc: ' + REPARENT_CC + '\nSubject: ' + REPARENT_SUBJECT + '\n\n' + body;
+        document.getElementById('mailtoBtn').href = 'mailto:' + REPARENT_TO +
+          '?cc=' + encodeURIComponent(REPARENT_CC) +
+          '&subject=' + encodeURIComponent(REPARENT_SUBJECT) +
+          '&body=' + encodeURIComponent(body);
+        if (email) { document.getElementById('reparentInbox').textContent = '📩 We’ve also emailed these exact steps to ' + email + ' so you can’t lose them.'; }
+        document.getElementById('stepReparent').classList.remove('hidden');
+        window.scrollTo(0, 0);
+      } else {
+        document.getElementById('stepValetax').classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+    }, 600);
+  });
+
+  // Copy button for the re-parenting email
+  document.getElementById('copyBtn').addEventListener('click', function () {
+    var ta = document.getElementById('reparentEmail');
+    var msg = document.getElementById('copiedMsg');
+    var done = function () { msg.textContent = 'Copied — now paste it into a new email to contact@valetax.com'; };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(ta.value).then(done, function () { ta.select(); document.execCommand('copy'); done(); });
+    } else {
+      ta.select(); document.execCommand('copy'); done();
+    }
+  });
+</script>
 </body>
 </html>
